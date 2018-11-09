@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import firebase from 'firebase'; 
 import { Button, Text, Container, Content, Header, Footer, Form, Item, Input, H1 } from 'native-base';
 
 export default class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = {username: '', password: ''};
+        this.state = {email: '', password: '', error: ''};
       }
-    onButtonPress(){
-        console.log(this.state.username)
+    onLoginPress(){
+        console.log(this.state.email)
         console.log(this.state.password)
-        this.props.navigation.navigate('DashBoard')
+
+        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+            .then(()=>this.props.navigation.navigate('DashBoard'))
     }
 
     render(){
@@ -19,14 +21,14 @@ export default class Login extends Component {
                 <Content>
                     
                     <Form style={{alignItems:'center'}}>
-                    <H1>Login</H1>
+                    <H1 style={{margin:10}}>Login</H1>
                         <Item>
-                            <Input placeholder="Username" onChangeText={(text) => this.setState({username: text})}/>
+                            <Input placeholder="Username" onChangeText={(text) => this.setState({email: text})}/>
                         </Item>
                         <Item last>
-                            <Input placeholder="Password" onChangeText={(text) => this.setState({password: text})}/>
+                            <Input secureTextEntry placeholder="Password" onChangeText={(text) => this.setState({password: text})}/>
                         </Item>
-                        <Button block success style={{margin:15}} onPress={this.onButtonPress.bind(this)}>
+                        <Button block success style={{margin:15}} onPress={this.onLoginPress.bind(this)}>
                             <Text>Login</Text>
                         </Button>
                     </Form>
