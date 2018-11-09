@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { Container, Content, H1 } from 'native-base';
 
 export default class Dashboard extends Component {
     render() {
         return (
-            <View>
-                <Text>poop</Text>
-            </View>
+            <Container>
+                <Content>
+                    <H1>Dashboard</H1>
+                </Content>
+            </Container>
         );
     }
 }
